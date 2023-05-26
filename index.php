@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link ref="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
 
 <body>
+    <main>
     <h1>Calculator app.</h1>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
@@ -24,19 +25,19 @@
     <?php
     if ($_SERVER['REQUEST_METHOD'] == "POST"){
         // INPUT DATA
-        $num_1 = filter_input(INPUT_POST, "Input number 1", FILTER_SANITIZE_NUMBER_FLOAT);
-        $num_2 = filter_input(INPUT_POST, "Input number 2", FILTER_SANITIZE_NUMBER_FLOAT);
+        $num_1 = filter_input(INPUT_POST, "num_1", FILTER_SANITIZE_NUMBER_FLOAT);
+        $num_2 = filter_input(INPUT_POST, "num_2", FILTER_SANITIZE_NUMBER_FLOAT);
         $operator = htmlspecialchars($_POST["operator"]);
 
         // ERROR HANDLING
         $errors = false;
 
-        if(empty($num_1) || empty($num_2) || empty($operator)) {
+        if (empty($num_1) || empty($num_2) || empty($operator)) {
             echo "<h4>Please fill in the provided fields.</h4>";
             $errors = true;
         }
 
-        if(!is_numeric($num_1) || !is_numeric($num_2)) {
+        if (!is_numeric($num_1) || !is_numeric($num_2)) {
             echo "<h4>Only numbers are allowed.</h4>";
             $errors = true;
         }
@@ -60,10 +61,11 @@
                 default:
                 echo '<h1>Calculator app just shat itself. Please standby.</h1>';
            } 
-           echo("<p>Result =" .$value."</p>");
+           echo "<h4>Result = " .$value."</h4>";
         }
     }
     ?>
 
     </body>
+</main>
 </html>
